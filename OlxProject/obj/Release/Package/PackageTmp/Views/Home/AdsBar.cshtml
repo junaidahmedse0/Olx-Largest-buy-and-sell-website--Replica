@@ -1,0 +1,90 @@
+﻿
+@model IEnumerable<OlxProject.Ad>
+
+<div class="">
+
+
+    <div class="row product-list" style="margin-top: 50px;">
+
+        @if (Model != null)
+        {
+
+
+            foreach (var item in Model)
+            {
+
+                @*<a href="/Home/PostDetail?id=@item.Id">
+                        <div class="col-md-3">
+                            <section class="panel">
+                                <div class="pro-img-box" style="height:260px; margin-bottom:40px !important;">
+                                    <img src="~/Data/User/@item.Image" alt="" height="90% !important;">
+
+                                </div>
+
+                                <div class="panel-body text-center">
+
+                                    <h4>
+                                        <a href="#" class="pro-title">
+                                          @item.Title
+
+                                        </a>
+                                    </h4>
+
+                                    <p class="price">Rs:@item.Price
+
+                                        @if (item.Featured == true)
+                                        {
+                                            <span class="label label-warning" >featured</span>
+                                        }
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                    </a>*@
+                <div class="col-md-3" style="">
+
+                    <div class="card" style="height:400PX; margin-bottom:30PX;">
+                        <a href="/Home/PostDetail?id=@item.Id">
+                            <img src="~/Data/User/@item.Image" alt="Denim Jeans" style="width:100%" height="60%;">
+                        </a>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <label>
+
+                            @item.Title
+
+
+                        </label>
+                        <p class="price" style="font-weight:bold;">Rs: @item.Price /-</p>
+                        <p>
+                            @item.State , @item.City
+                            @if (item.Featured == true)
+                            {
+                                <span class="label label-warning" style="margin-left:10px;">featured</span>
+                            }
+
+
+                        </p>
+                        @*<p><button>Add to Cart</button></p>*@
+                    </div>
+
+                </div>
+            }
+        }
+        else
+        {
+
+
+            <h1 style="color:red">Not Found Partial</h1>
+
+        }
+
+
+
+    </div>
+
+</div>
+
+

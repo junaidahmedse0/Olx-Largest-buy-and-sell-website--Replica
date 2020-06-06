@@ -1,0 +1,41 @@
+﻿@model   IEnumerable<OlxProject.Ad>
+@{
+    ViewBag.Title = "UserAd";
+}
+
+<div class="form form-body">
+    <div class="wrapper">
+        <h2>
+            All Your Adds
+        </h2>
+        <hr />
+       @foreach (var item in Model)
+       {
+
+        <ul class="list">
+            <a href="/Home/PostDetail?id=@item.Id">
+                <li>
+                    <img src="~/Data/User/@item.Image" title="" alt="" />
+                    <section class="list-left">
+                        <h5 class="title">@item.Title</h5>
+                        <span class="adprice">RS: @item.Price</span>
+               
+                    </section>
+                    <section class="list-right">
+                        <span class="date">Today, 17:55</span>
+                        <span class="cityname">@item.City</span>
+                    </section>
+                    <div class="clearfix"></div>
+                </li>
+            </a>
+
+        </ul>
+       }
+        
+
+
+
+
+
+</div>
+</div>

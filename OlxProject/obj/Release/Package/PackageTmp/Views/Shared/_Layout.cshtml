@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title -HomePage</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="navbar  navbar-fixed-top">
+        <div class="container-fluid header">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/home/index"><img src="~/Image/logo.png" height="50px;" width="50px;"></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="link">
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left" action="/home/filter">
+                    <div class="form-group">
+                      @*  @Html.DropDownList("country", ViewBag.states as SelectList, "Select a Country", new { @class= "form-control", @onchange = "GetState();" })*@
+                        
+                        @Html.DropDownList("Province", new List<SelectListItem>
+                           {
+
+                               new SelectListItem() { Text = "Islamabad Capital", Value = "Islamabad" },
+                               new SelectListItem() { Text = "Punjab", Value = "Punjab" },
+                               new SelectListItem() { Text = "Sindh", Value = "Sindh" },
+                               new SelectListItem() { Text = "KPK", Value = "KPK" },
+                               new SelectListItem() { Text = "Balochistan", Value = "Balochistan" }
+                             }, "Choose State", new { @class = "form-control col-md-2", @onchange = "GetProvince();",
+                                 @style = "height:40px; border-radius:0px;" })
+
+
+
+
+                        
+                    </div>
+                    <div class="form-group">
+                        @Html.DropDownList("City1", new List<SelectListItem>
+                   {
+
+
+
+
+
+
+
+                   }, "Choose City", new { @id= "DropDownListStates1", @class = "form-control col-md-2", @style = "height:40px; border-radius:0px;" })
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+
+         
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="search" id="search" style="border-radius:0px;height:40px;width:400px !important; max-width:400px !important;" required>
+                        <div class="input-group-btn">
+                            <button class="btn btn-bg" type="submit" style="border-radius:0px;height:40px;">
+                                <i class="glyphicon glyphicon-search" style="color:white;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right link">
+                
+                   
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        
+                    <li class="dropdown">
+                       
+                      
+
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="~/Image/virtual.png" class="img-circle" height="40px;" width="40px;" /> <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Home/UserAd?name=@User.Identity.Name"><i class="icon-cog"></i> My Ads</a></li>
+                              
+                                <li><a href="/Home/CancelAds?name=@User.Identity.Name"><i class="icon-envelope"></i>Canceled Ads</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/Account/logout"><i class="icon-off"></i> Logout</a></li>
+                            </ul>
+
+                       
+
+                    </li>
+                    <li class="link"><a href="/Home/Category" class="btn sell-btn"><span class="glyphicon glyphicon-camera" style="padding-right:8px; margin-top: 10px;"></span>SELL</a></li>
+
+
+                    }
+                    else
+                    {
+                        <li class="link"><a href="/Account/login" class="btn sell-btn"><span class="glyphicon glyphicon-alert" style="padding-right:8px; margin-top: 10px;"></span>LOGIN</a></li>
+
+                    }
+
+
+                </ul>
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+    <hr />
+
+    <div class="">
+        @RenderBody()
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jqueryval")
+</body>
+</html>
+

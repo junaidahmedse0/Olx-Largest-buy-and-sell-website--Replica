@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<section>
+    @{
+
+        Html.RenderPartial("HeaderBottomPartial");
+    }
+</section>
+<div class="container">
+    <div class="row">
+          <div class="col-sm-12">
+                @{
+
+                    Html.RenderAction("AllPosts");
+                }
+            </div>
+      </div>
+
+</div>
+
+
+<section>
+    @{
+
+        Html.RenderPartial("FooterPartial");
+    }
+</section>

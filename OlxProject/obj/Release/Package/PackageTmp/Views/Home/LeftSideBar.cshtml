@@ -1,0 +1,69 @@
+﻿<div class="" style="margin-top: 50px;">
+
+   <!-- <section class="panel">
+        <header class="panel-heading">
+            Category
+        </header>
+        <div class="panel-body">
+            <ul class="nav prod-cat">
+
+                <li><a href="#"><i class="fa fa-angle-right"></i> Mobiles</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i> Cars</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i> House</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i> Property</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i> Electronics</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i> Bikes</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i> Business</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i> Services</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i> Jobs</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i> Animals</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i> Furniture</a></li>
+
+                <li><a href="#"><i class="fa fa-angle-right"></i> Fashion</a></li>
+
+                <li><a href="#"><i class="fa fa-angle-right"></i> fashion</a></li>
+
+                <li><a href="#"><i class="fa fa-angle-right"></i> Books</a></li>
+                <li><a href="#"><i class="fa fa-angle-right"></i> Kids</a></li>
+
+
+            </ul>
+        </div>
+    </section>-->
+
+    <section class="panel">
+        <header class="panel-heading">
+            Filter
+        </header>
+        <div class="panel-body">
+            <form action="/home/filter">
+                <input type="hidden" value="@ViewBag.Province" name="province" id="province-field"/>
+                <input type="hidden" value="@ViewBag.City" name="city1" id="city-field" />
+                <input type="hidden" value="@ViewBag.Search" name="search" id="search-field" />
+
+                <div class="form-group">
+                    <label>Condition</label>
+                    <select class="form-control" name="condition">
+                        <option value="used">used</option>
+                        <option value="new">new</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Min</label>
+                    <input type="text" class="form-control" id="" placeholder="@ViewBag.min" name="min" >
+
+                </div>
+                <div class="form-group">
+                    <label>Max</label>
+                    <input type="text" class="form-control" id="" placeholder="@ViewBag.min" name="max">
+
+                </div>
+                <button class="btn btn-primary" type="submit">Filter</button>
+            </form>
+        </div>
+    </section>
+
+</div>
+
+

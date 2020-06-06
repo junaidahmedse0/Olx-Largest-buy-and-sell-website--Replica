@@ -1,0 +1,64 @@
+﻿<div class="site-section">
+    <div class="">
+        <div class="row mb-5">
+
+        </div>
+        <div class="row mt-5">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-6">
+
+                    <div class="d-block d-md-flex listing rounded-img">
+
+                        <img src="~/Data/User/@item.Image" class="rounded-img" height="auto" width="50%" />
+                        @*</div>*@
+                        <div class="lh-content">
+                            <span class="category">@item.Category</span>
+                            @if (String.Equals(ViewBag.Show, "Review"))
+                            {
+                                <a href="/Admin/PostDetail/@item.Id" class="rm-left"><span class="category">Review</span></a>
+
+                            }
+                            <div>
+                                <h3 style="font-weight:bold;">@item.Title</h3>
+                            </div>
+                            <address>@item.State , @item.City</address>
+                            <p class="mb-0">
+                                <span class="fas fas-star"></span>
+                                <span class="icon-star text-warning"></span>
+                                <span class="icon-star text-warning"></span>
+                                <span class="icon-star text-warning"></span>
+                                <span class="icon-star text-secondary"></span>
+
+                                @if (item.Featured == false && String.Equals(ViewBag.Show, "feature"))
+                                {
+                                    <a href="/Admin/Feature?id=@item.Id"><span class="badge badge-warning">feature</span></a>
+                                }
+                                else if (item.Featured == true && String.Equals(ViewBag.Show, "feature"))
+                                {
+                                    <a href="/Admin/Featured?id=@item.Id"><span class="badge badge-warning">featured</span></a>
+
+                                }
+
+                                @if (item.Cancel == false)
+                                {
+                                    <a href="/Admin/Cancel?id=@item.Id"><span class="badge badge-pill badge-danger">cancel</span></a>
+                                }
+                                else
+                                {
+                                    <a href="/Admin/Canceled?id=@item.Id"><span class="badge badge-pill badge-danger">canceled</span></a>
+
+                                }
+                            </p>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

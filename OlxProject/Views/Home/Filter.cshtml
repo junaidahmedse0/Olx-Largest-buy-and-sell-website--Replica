@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Filter";
+}
+
+<section>
+    @{
+
+        Html.RenderPartial("HeaderBottomPartial");
+    }
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            @{
+
+                Html.RenderPartial("LeftSideBar");
+            }
+        </div>
+        <div class="col-sm-9">
+            @{
+
+                Html.RenderPartial("AdsBar");
+            }
+        </div>
+    </div>
+
+</div>
+
+
+<section>
+    @{
+
+        Html.RenderPartial("FooterPartial");
+    }
+</section>
+

@@ -1,0 +1,93 @@
+﻿@model OlxProject.ViewModel.PostDetailViewModel
+@{
+    ViewBag.Title = "PostDetail";
+    Layout = "~/Views/Shared/_myLayout.cshtml";
+    var i = 0;
+}
+<!--Ad Detail-->
+<div class="single-page main-grid-border">
+    <div class="container">
+      <div class="product-desc">
+            <div class="col-md-12 product-view">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div id="carousel" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner" style="">
+                                    <div class="item active">
+                                        <img src="~/Data/User/@Model.Image[0].ImagePath" height="100%;">
+                                    </div>
+                                 </div>
+                                <hr />
+                                <div class="clearfix">
+                                    <div class="carousel-link">
+
+                                        @foreach (var item in Model.Image)
+                                        {
+
+                                            <div data-target="#carousel" data-slide-to="@i" class="thumb" style="margin-right:20px;box-shadow:0px 2px 4px 0px; height:100px;"><img src="~/Data/User/@item.ImagePath" height="100%"></div>
+
+                                            i++;
+                                        }
+                                    </div>
+                                </div>
+
+                                <hr />
+                            </div>
+                        </div> <!-- /col-sm-6 -->
+
+                    </div> <!-- /row -->
+                </div>
+
+
+                <div class="product-details">
+
+                    <div class="row" style="width:100%; box-shadow:0px 2px 4px 0px;">
+                        @foreach (var item in Model.AddAttribute)
+                        {
+                            <div class="col-sm-6" style="margin-top:20px;">
+                                <label>@item.Attribute :</label>
+                                <label>@item.value </label>
+                            </div>
+                        }
+
+
+                    </div>
+
+
+                    <hr />
+                    <h4>Title : <a href="#">@Model.Ad.Title</a></h4>
+                    <p><strong>Description</strong> @Model.Ad.Description</p>
+
+                </div>
+                <div class="tips">
+                    <h4>Reviews</h4>
+                    <hr />
+                    <br />
+                
+                    <ul>
+                        @foreach (var item in Model.Reviews)
+                        {
+                            <label>Admin</label>
+                            <li>@item.Review1 </li>
+                        }
+                    </ul>
+                    <form action="/Admin/Review">
+                        <div class="input-group" style="width:100%;">
+                            <input type="hidden" name="id" value="@Model.Ad.Id">
+                            <input type="text" class="form-control" placeholder="Review" name="review" id="Review">
+
+                            <button class="btn  btn-primary" type="submit">
+                                Submit
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+

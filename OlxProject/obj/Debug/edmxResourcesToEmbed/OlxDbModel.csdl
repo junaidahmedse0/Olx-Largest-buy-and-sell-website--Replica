@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OlxDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Ad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Condition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Ad_User" FromRole="Ad" ToRole="User" />
+    <NavigationProperty Name="AddAttributes" Relationship="Self.FK_AddAttribute_Ad" FromRole="Ad" ToRole="AddAttribute" />
+    <NavigationProperty Name="FavoriteAds" Relationship="Self.FK_FavoriteAd_Ad" FromRole="Ad" ToRole="FavoriteAd" />
+    <NavigationProperty Name="Images" Relationship="Self.FK_Image_Ad" FromRole="Ad" ToRole="Image" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Feature" Type="Boolean" Nullable="false" />
+    <Property Name="Featured" Type="Boolean" Nullable="false" />
+    <Property Name="Cancel" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Reviews" Relationship="OlxDbModel.FK_Review_Review" FromRole="Ad" ToRole="Review" />
+  </EntityType>
+  <EntityType Name="AddAttribute">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="AdId" Type="Int32" />
+    <Property Name="Attribute" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Ad" Relationship="Self.FK_AddAttribute_Ad" FromRole="AddAttribute" ToRole="Ad" />
+  </EntityType>
+  <EntityType Name="FavoriteAd">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="AdId" Type="Int32" />
+    <Property Name="Fav_TimeStamp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Ad" Relationship="Self.FK_FavoriteAd_Ad" FromRole="FavoriteAd" ToRole="Ad" />
+    <NavigationProperty Name="User" Relationship="Self.FK_FavoriteAd_User" FromRole="FavoriteAd" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ImagePath" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AdId" Type="Int32" />
+    <NavigationProperty Name="Ad" Relationship="Self.FK_Image_Ad" FromRole="Image" ToRole="Ad" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="State1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Cities" Relationship="OlxDbModel.FK_City_State" FromRole="State" ToRole="City" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Info" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Ads" Relationship="Self.FK_Ad_User" FromRole="User" ToRole="Ad" />
+    <NavigationProperty Name="FavoriteAds" Relationship="Self.FK_FavoriteAd_User" FromRole="User" ToRole="FavoriteAd" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
+    <Property Name="EmailVerification" Type="Boolean" />
+    <Property Name="ActivationCode" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK_UserRole_User" FromRole="UserRole" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Ad_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Ad" Type="Self.Ad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ad">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AddAttribute_Ad">
+    <End Role="Ad" Type="Self.Ad" Multiplicity="0..1" />
+    <End Role="AddAttribute" Type="Self.AddAttribute" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AddAttribute">
+        <PropertyRef Name="AdId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FavoriteAd_Ad">
+    <End Role="Ad" Type="Self.Ad" Multiplicity="0..1" />
+    <End Role="FavoriteAd" Type="Self.FavoriteAd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FavoriteAd">
+        <PropertyRef Name="AdId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Image_Ad">
+    <End Role="Ad" Type="Self.Ad" Multiplicity="0..1" />
+    <End Role="Image" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="AdId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FavoriteAd_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="FavoriteAd" Type="Self.FavoriteAd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FavoriteAd">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserRole_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OlxDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Ads" EntityType="Self.Ad" />
+    <EntitySet Name="AddAttributes" EntityType="Self.AddAttribute" />
+    <EntitySet Name="FavoriteAds" EntityType="Self.FavoriteAd" />
+    <EntitySet Name="Images" EntityType="Self.Image" />
+    <EntitySet Name="States" EntityType="Self.State" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+    <AssociationSet Name="FK_Ad_User" Association="Self.FK_Ad_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Ad" EntitySet="Ads" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AddAttribute_Ad" Association="Self.FK_AddAttribute_Ad">
+      <End Role="Ad" EntitySet="Ads" />
+      <End Role="AddAttribute" EntitySet="AddAttributes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FavoriteAd_Ad" Association="Self.FK_FavoriteAd_Ad">
+      <End Role="Ad" EntitySet="Ads" />
+      <End Role="FavoriteAd" EntitySet="FavoriteAds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Image_Ad" Association="Self.FK_Image_Ad">
+      <End Role="Ad" EntitySet="Ads" />
+      <End Role="Image" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FavoriteAd_User" Association="Self.FK_FavoriteAd_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="FavoriteAd" EntitySet="FavoriteAds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <EntitySet Name="Cities" EntityType="OlxDbModel.City" />
+    <AssociationSet Name="FK_City_State" Association="OlxDbModel.FK_City_State">
+      <End Role="State" EntitySet="States" />
+      <End Role="City" EntitySet="Cities" />
+    </AssociationSet>
+    <EntitySet Name="Attributes" EntityType="OlxDbModel.Attribute" />
+    <EntitySet Name="Reviews" EntityType="OlxDbModel.Review" />
+    <AssociationSet Name="FK_Review_Review" Association="OlxDbModel.FK_Review_Review">
+      <End Role="Ad" EntitySet="Ads" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="City1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StateId" Type="Int32" />
+    <NavigationProperty Name="State" Relationship="OlxDbModel.FK_City_State" FromRole="City" ToRole="State" />
+  </EntityType>
+  <Association Name="FK_City_State">
+    <End Type="OlxDbModel.State" Role="State" Multiplicity="0..1" />
+    <End Type="OlxDbModel.City" Role="City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Attribute">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="AdId" Type="Int32" />
+    <Property Name="Review1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Ad" Relationship="OlxDbModel.FK_Review_Review" FromRole="Review" ToRole="Ad" />
+  </EntityType>
+  <Association Name="FK_Review_Review">
+    <End Type="OlxDbModel.Ad" Role="Ad" Multiplicity="0..1" />
+    <End Type="OlxDbModel.Review" Role="Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="AdId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,103 @@
+﻿@model OlxProject.Models.UserViewModel
+@{
+    ViewBag.Title = "SignUp2";
+}
+
+
+
+<div class="form form-body">
+    <div class="wrapper">
+        @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                
+               @* <div style="text-align: center;font-weight: bold">SignUp</div>*@
+                <h1 style="color:#337ab7 !important;">SIGN UP</h1>
+                <hr/>
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new {@class = "control-label col-md-2"})
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Email, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new {@class = "control-label col-md-2"})
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Password, new {htmlAttributes = new {@class = "form-control" , @type = "password" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new {@class = "control-label col-md-2"})
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ConfirmPassword, new {htmlAttributes = new {@class = "form-control", @type = "password" } })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new {@class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Contact, htmlAttributes: new {@class = "control-label col-md-2"})
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Contact, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.Contact, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Info, htmlAttributes: new {@class = "control-label col-md-2"})
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Info, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.Info, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input class="btn btn-primary" type="submit" value="Sign Up" style="width:100%;">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="avatar-upload">
+                                <div class="avatar-edit">
+                                    <input type='file' id="imageUpload" name="File" accept=".png, .jpg, .jpeg"/>
+
+
+                                   
+                                    
+                                     <label for="imageUpload"></label>
+
+
+                                </div>
+
+                                <div class="avatar-preview">
+
+                                    <div id="imagePreview" style="background-image: url('/Image/virtual.png'); ">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+
+
+                    </div>
+                </div>
+       
+
+            </div>
+        }
+
+    </div>
+</div>
